@@ -6,4 +6,4 @@ export interface BookData {
     author: string;
     publisher: string;
     coverImgUrl: string;
-}
+} 
