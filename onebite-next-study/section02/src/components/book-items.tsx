@@ -1,13 +1,11 @@
 import type { BookData } from "@/types";
 import Link from "next/link";
 import style from "@/components/book-item.module.css"
-import { title } from 'process';
 
 export default function BookItem({
     id,
     title,
     subTitle,
-    description,
     author,
     publisher,
     coverImgUrl,

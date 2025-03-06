@@ -23,7 +23,7 @@ export default function SearchableLayout({ children }:{
         router.push(`./search?q=${search}`);
     }
 
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: { key: string; }) => {
         if(e.key === "Enter") {
             onSubmit();
         }

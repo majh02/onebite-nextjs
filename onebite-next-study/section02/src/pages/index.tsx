@@ -3,13 +3,36 @@ import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css"
 import { ReactNode } from "react";
 import BookItem from "@/components/book-items";
-import { InferGetServerSidePropsType } from "next";
+import { 
+  //InferGetServerSidePropsType, 
+  InferGetStaticPropsType } from "next";
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-random-books";
 
-export const getServerSideProps = async () => {
-  // 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터를 불러오는 함수
+// // SSR
+// export const getServerSideProps = async () => {
+//   // 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터를 불러오는 함수
+//   // 반드시 객체를 반환해야함
+
+//   const [allBooks, recoBooks] = await Promise.all([
+//     fetchBooks(),
+//     fetchRandomBooks(),
+//   ])
+  
+//   return { 
+//     props: {
+//       allBooks,
+//       recoBooks,
+//    } 
+//   };
+// };
+
+// SSG
+export const getStaticProps = async () => {
+  // 빌드 시 한번만 실행되는 함수
   // 반드시 객체를 반환해야함
+
+  console.log("인덱스 페이지");
 
   const [allBooks, recoBooks] = await Promise.all([
     fetchBooks(),
@@ -22,12 +45,14 @@ export const getServerSideProps = async () => {
       recoBooks,
    } 
   };
-};
+}
 
 export default function Home({
   allBooks,
   recoBooks,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>
+//InferGetServerSidePropsType<typeof getServerSideProps>
+) {
 
   return (
     <div className={style.container}>
